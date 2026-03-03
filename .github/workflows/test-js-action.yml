@@ -1,0 +1,22 @@
+name: Test JS Action
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run JS greet action
+        id: greet
+        uses: ./.github/actions/js-greet
+        with:
+          name: "Uwe"
+
+      - name: Print output
+        run: echo "Returned: ${{ steps.greet.outputs.greeting }}"
